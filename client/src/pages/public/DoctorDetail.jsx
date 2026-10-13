@@ -5,6 +5,7 @@ import { MapPin, Stethoscope, Briefcase, Banknote } from 'lucide-react'
 import api from '../../api/axios'
 import { useAuth } from '../../context/AuthContext'
 import Navbar from '../../components/Navbar'
+import Avatar from '../../components/Avatar'
 import StarRating from '../../components/StarRating'
 import SlotPicker from '../../components/SlotPicker'
 
@@ -49,10 +50,15 @@ export default function DoctorDetail() {
       <Navbar />
       <div className="mx-auto grid max-w-5xl gap-6 px-4 py-10 md:grid-cols-5">
         <div className="card md:col-span-3">
-          <h1 translate="no" className="text-2xl font-extrabold">{doctor.user.name}</h1>
-          <p className="mt-1 flex items-center gap-2 text-sm text-slate-500">
-            <StarRating value={doctor.averageRating} /> {doctor.reviewCount ? `${doctor.averageRating} (${doctor.reviewCount} reviews)` : 'No reviews yet'}
-          </p>
+          <div className="flex items-center gap-4">
+            <Avatar name={doctor.user.name} src={doctor.user.avatar} size={72} />
+            <div>
+              <h1 translate="no" className="text-2xl font-extrabold">{doctor.user.name}</h1>
+              <p className="mt-1 flex items-center gap-2 text-sm text-slate-500">
+                <StarRating value={doctor.averageRating} /> {doctor.reviewCount ? `${doctor.averageRating} (${doctor.reviewCount} reviews)` : 'No reviews yet'}
+              </p>
+            </div>
+          </div>
           <div className="mt-3 space-y-2 text-sm text-slate-600">
             <p className="flex items-center gap-2"><Stethoscope size={16} className="text-brand-600" /> {doctor.specialization}</p>
             <p className="flex items-center gap-2"><MapPin size={16} className="text-brand-600" /> {doctor.hospital}</p>

@@ -21,6 +21,7 @@ import DashboardLayout from './components/DashboardLayout'
 import PatientOverview from './pages/patient/Overview'
 import Appointments from './pages/patient/Appointments'
 import Favourites from './pages/patient/Favourites'
+import PatientProfile from './pages/patient/Profile'
 import DoctorOverview from './pages/doctor/Overview'
 import Schedule from './pages/doctor/Schedule'
 import DoctorProfilePage from './pages/doctor/Profile'
@@ -42,6 +43,7 @@ export default function App() {
             <Route index element={<PatientOverview />} />
             <Route path="appointments" element={<Appointments />} />
             <Route path="favourites" element={<Favourites />} />
+            <Route path="profile" element={<PatientProfile />} />
             <Route path="records" element={<HealthRecords />} />
             <Route path="chat" element={<Chat />} />
           </Route>

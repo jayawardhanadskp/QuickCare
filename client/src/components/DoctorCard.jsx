@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Avatar from './Avatar'
 import StarRating from './StarRating'
 import { Heart, MapPin, Stethoscope } from 'lucide-react'
 
@@ -7,9 +8,7 @@ export default function DoctorCard({ doctor, isFavourite, onToggleFavourite }) {
   return (
     <div className="card flex flex-col gap-3">
       <div className="flex items-start justify-between">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-100 text-lg font-bold text-brand-700">
-          {doctor.user.name.replace('Dr. ', '')[0]}
-        </div>
+        <Avatar name={doctor.user.name} src={doctor.user.avatar} size={48} />
         {onToggleFavourite && (
           <button onClick={() => onToggleFavourite(doctor.user._id)} title="Favourite">
             <Heart size={20} className={isFavourite ? 'fill-red-500 text-red-500' : 'text-slate-400'} />

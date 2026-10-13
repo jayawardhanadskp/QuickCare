@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { Plus, Trash2 } from 'lucide-react'
 import api from '../../api/axios'
+import Field from '../../components/Field'
+import PictureUpload from '../../components/PictureUpload'
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
@@ -35,12 +37,14 @@ export default function DoctorProfilePage() {
     <form onSubmit={handleSubmit} className="max-w-2xl space-y-5">
       <h1 className="text-2xl font-extrabold">Profile & availability</h1>
 
+      <div className="card"><PictureUpload /></div>
+
       <div className="card grid gap-4 sm:grid-cols-2">
-        <input className="input" placeholder="Specialization" required value={form.specialization} onChange={(e) => set('specialization', e.target.value)} />
-        <input className="input" placeholder="Hospital / clinic" value={form.hospital} onChange={(e) => set('hospital', e.target.value)} />
-        <input className="input" type="number" min="0" placeholder="Years of experience" value={form.experience} onChange={(e) => set('experience', e.target.value)} />
-        <input className="input" type="number" min="0" placeholder="Fee (LKR)" value={form.fee} onChange={(e) => set('fee', e.target.value)} />
-        <textarea className="input sm:col-span-2" rows="3" placeholder="About you" value={form.bio} onChange={(e) => set('bio', e.target.value)} />
+        <Field label="Specialization"><input className="input" required value={form.specialization} onChange={(e) => set('specialization', e.target.value)} /></Field>
+        <Field label="Hospital / clinic"><input className="input" value={form.hospital} onChange={(e) => set('hospital', e.target.value)} /></Field>
+        <Field label="Years of experience"><input className="input" type="number" min="0" value={form.experience} onChange={(e) => set('experience', e.target.value)} /></Field>
+        <Field label="Consultation fee (LKR)"><input className="input" type="number" min="0" value={form.fee} onChange={(e) => set('fee', e.target.value)} /></Field>
+        <Field label="About you" className="sm:col-span-2"><textarea className="input" rows="3" value={form.bio} onChange={(e) => set('bio', e.target.value)} /></Field>
       </div>
 
       <div className="card space-y-3">

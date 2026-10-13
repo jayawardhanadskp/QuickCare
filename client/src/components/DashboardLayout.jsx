@@ -1,6 +1,7 @@
 import { NavLink, Outlet, Link, useNavigate } from 'react-router-dom'
 import { HeartPulse, LogOut, LayoutDashboard, CalendarDays, Heart, UserRound, FileText, Star, CircleHelp, MessageCircle, Users, Gift } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
+import Avatar from './Avatar'
 import LanguageSwitcher from './LanguageSwitcher'
 
 // Sidebar links for each role
@@ -11,6 +12,7 @@ const menus = {
     { to: '/patient/favourites', label: 'Favourite doctors', icon: Heart },
     { to: '/patient/records', label: 'Health records', icon: FileText },
     { to: '/patient/chat', label: 'Messages', icon: MessageCircle },
+    { to: '/patient/profile', label: 'My profile', icon: UserRound },
   ],
   doctor: [
     { to: '/doctor', label: 'Overview', icon: LayoutDashboard, end: true },
@@ -27,7 +29,7 @@ const menus = {
     { to: '/admin/appointments', label: 'Appointments', icon: CalendarDays },
     { to: '/admin/loyalty', label: 'Loyalty points', icon: Gift },
     { to: '/admin/records', label: 'Health records', icon: FileText },
-    { to: '/admin/faqs', label: 'FAQs', icon: CircleHelp, MessageCircle, Users, Gift },
+    { to: '/admin/faqs', label: 'FAQs', icon: CircleHelp },
   ],
 }
 
@@ -71,9 +73,12 @@ export default function DashboardLayout() {
               </NavLink>
             ))}
           </div>
-          <p className="hidden text-sm text-slate-500 md:block">
-            Signed in as <span translate="no" className="font-semibold text-slate-800">{user.name}</span> ({user.role})
-          </p>
+          <div className="hidden items-center gap-3 md:flex">
+            <Avatar name={user.name} src={user.avatar} size={36} />
+            <p className="text-sm text-slate-500">
+              Signed in as <span translate="no" className="font-semibold text-slate-800">{user.name}</span> ({user.role})
+            </p>
+          </div>
           <LanguageSwitcher />
         </header>
         <main className="p-4 sm:p-6"><Outlet /></main>
