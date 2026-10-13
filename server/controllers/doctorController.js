@@ -20,7 +20,7 @@ const listDoctors = async (req, res) => {
   const filter = {};
   if (specialization) filter.specialization = specialization;
 
-  let doctors = await DoctorProfile.find(filter).populate('user', 'name email phone isActive');
+  let doctors = await DoctorProfile.find(filter).populate('user', 'name email phone isActive avatar');
   doctors = doctors.filter((d) => d.user && d.user.isActive);
 
   if (q) {
@@ -35,7 +35,7 @@ const listDoctors = async (req, res) => {
 
 // One doctor by their user id
 const getDoctor = async (req, res) => {
-  const doctor = await DoctorProfile.findOne({ user: req.params.id }).populate('user', 'name email phone');
+  const doctor = await DoctorProfile.findOne({ user: req.params.id }).populate('user', 'name email phone avatar');
   if (!doctor) return res.status(404).json({ message: 'Doctor not found' });
   res.json((await withRatings([doctor]))[0]);
 };

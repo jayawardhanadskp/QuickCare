@@ -16,7 +16,7 @@ const contacts = async (req, res) => {
   const field = req.user.role === 'patient' ? 'doctor' : 'patient';
   const mine = req.user.role === 'patient' ? 'patient' : 'doctor';
   const ids = await Appointment.distinct(field, { [mine]: req.user._id });
-  res.json(await User.find({ _id: { $in: ids } }).select('name role').sort('name'));
+  res.json(await User.find({ _id: { $in: ids } }).select('name role avatar').sort('name'));
 };
 
 // Old messages with one person

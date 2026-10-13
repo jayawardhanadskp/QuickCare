@@ -60,7 +60,7 @@ const stats = async (req, res) => {
 // List users, optionally only one role (?role=doctor)
 const listUsers = async (req, res) => {
   const filter = req.query.role ? { role: req.query.role } : {};
-  const users = await User.find(filter).select('-password').sort('name').lean();
+  const users = await User.find(filter).select('-password -avatar').sort('name').lean();
 
   // Attach the specialization to doctors
   const profiles = await DoctorProfile.find();
