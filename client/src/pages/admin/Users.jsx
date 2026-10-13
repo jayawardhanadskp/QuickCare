@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { Plus, Trash2, Search } from 'lucide-react'
+import Field from '../../components/Field'
 import api from '../../api/axios'
 
 const emptyDoctor = { name: '', email: '', password: '', phone: '', specialization: '', fee: '', hospital: '' }
@@ -101,14 +102,14 @@ export default function Users() {
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/40 p-4">
           <form onSubmit={addDoctor} className="card w-full max-w-md space-y-3">
             <h2 className="text-lg font-bold">Add doctor</h2>
-            <input className="input" placeholder="Full name" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-            <input className="input" type="email" placeholder="Email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-            <input className="input" type="password" placeholder="Password (min 6 characters)" required value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
-            <input className="input" placeholder="Phone" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
-            <input className="input" placeholder="Specialization" required value={form.specialization} onChange={(e) => setForm({ ...form, specialization: e.target.value })} />
+            <Field label="Full name"><input className="input" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} /></Field>
+            <Field label="Email"><input className="input" type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} /></Field>
+            <Field label="Password (min 6 characters)"><input className="input" type="password" required value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} /></Field>
+            <Field label="Phone"><input className="input" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} /></Field>
+            <Field label="Specialization"><input className="input" required value={form.specialization} onChange={(e) => setForm({ ...form, specialization: e.target.value })} /></Field>
             <div className="grid grid-cols-2 gap-3">
-              <input className="input" type="number" min="0" placeholder="Fee" value={form.fee} onChange={(e) => setForm({ ...form, fee: e.target.value })} />
-              <input className="input" placeholder="Hospital" value={form.hospital} onChange={(e) => setForm({ ...form, hospital: e.target.value })} />
+              <Field label="Fee (LKR)"><input className="input" type="number" min="0" value={form.fee} onChange={(e) => setForm({ ...form, fee: e.target.value })} /></Field>
+              <Field label="Hospital"><input className="input" value={form.hospital} onChange={(e) => setForm({ ...form, hospital: e.target.value })} /></Field>
             </div>
             <div className="flex justify-end gap-2">
               <button type="button" className="btn-outline" onClick={() => setForm(null)}>Close</button>

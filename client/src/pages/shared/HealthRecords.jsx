@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { Plus, Pencil, Trash2 } from 'lucide-react'
+import Field from '../../components/Field'
 import api from '../../api/axios'
 import { useAuth } from '../../context/AuthContext'
 
@@ -101,17 +102,19 @@ export default function HealthRecords() {
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/40 p-4">
           <form onSubmit={handleSave} className="card w-full max-w-md space-y-3">
             <h2 className="text-lg font-bold">{editingId ? 'Edit record' : 'Add record'}</h2>
-            <input className="input" placeholder="Title" required value={form.title}
-              onChange={(e) => setForm({ ...form, title: e.target.value })} />
+            <Field label="Title"><input className="input" required value={form.title}
+              onChange={(e) => setForm({ ...form, title: e.target.value })} /></Field>
             <div className="grid grid-cols-2 gap-3">
-              <select className="input capitalize" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })}>
-                {categories.map((c) => <option key={c}>{c}</option>)}
-              </select>
-              <input type="date" className="input" required value={form.date}
-                onChange={(e) => setForm({ ...form, date: e.target.value })} />
+              <Field label="Category">
+                <select className="input capitalize" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })}>
+                  {categories.map((c) => <option key={c}>{c}</option>)}
+                </select>
+              </Field>
+              <Field label="Date"><input type="date" className="input" required value={form.date}
+                onChange={(e) => setForm({ ...form, date: e.target.value })} /></Field>
             </div>
-            <textarea className="input" rows="4" placeholder="Details" value={form.details}
-              onChange={(e) => setForm({ ...form, details: e.target.value })} />
+            <Field label="Details"><textarea className="input" rows="4" value={form.details}
+              onChange={(e) => setForm({ ...form, details: e.target.value })} /></Field>
             <div className="flex justify-end gap-2">
               <button type="button" className="btn-outline" onClick={() => setForm(null)}>Close</button>
               <button className="btn">Save</button>

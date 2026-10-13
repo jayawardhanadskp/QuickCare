@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { Plus, Pencil, Trash2 } from 'lucide-react'
+import Field from '../../components/Field'
 import api from '../../api/axios'
 
 // Admin adds, edits and deletes FAQs
@@ -64,10 +65,10 @@ export default function Faqs() {
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/40 p-4">
           <form onSubmit={handleSave} className="card w-full max-w-md space-y-3">
             <h2 className="text-lg font-bold">{editingId ? 'Edit FAQ' : 'Add FAQ'}</h2>
-            <input className="input" placeholder="Question" required value={form.question}
-              onChange={(e) => setForm({ ...form, question: e.target.value })} />
-            <textarea className="input" rows="4" placeholder="Answer" required value={form.answer}
-              onChange={(e) => setForm({ ...form, answer: e.target.value })} />
+            <Field label="Question"><input className="input" required value={form.question}
+              onChange={(e) => setForm({ ...form, question: e.target.value })} /></Field>
+            <Field label="Answer"><textarea className="input" rows="4" required value={form.answer}
+              onChange={(e) => setForm({ ...form, answer: e.target.value })} /></Field>
             <div className="flex justify-end gap-2">
               <button type="button" className="btn-outline" onClick={() => setForm(null)}>Close</button>
               <button className="btn">Save</button>
