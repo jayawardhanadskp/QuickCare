@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { useAuth } from '../../context/AuthContext'
 import Field from '../../components/Field'
-import Navbar from '../../components/Navbar'
+import AuthLayout from '../../components/AuthLayout'
 
 export default function Register() {
   const { register } = useAuth()
@@ -27,22 +27,18 @@ export default function Register() {
   }
 
   return (
-    <div>
-      <Navbar />
-      <div className="mx-auto mt-12 max-w-md px-4">
-        <form onSubmit={handleSubmit} className="card space-y-4">
-          <h2 className="text-2xl font-extrabold">Create account</h2>
-          <Field label="Full name"><input className="input" required value={form.name} onChange={update('name')} /></Field>
-          <Field label="Email"><input className="input" type="email" required value={form.email} onChange={update('email')} /></Field>
-          <Field label="Phone"><input className="input" value={form.phone} onChange={update('phone')} /></Field>
-          <Field label="Password (min 6 characters)"><input className="input" type="password" required minLength={6}
-            value={form.password} onChange={update('password')} /></Field>
-          <button className="btn w-full" disabled={loading}>{loading ? 'Please wait...' : 'Sign up'}</button>
-          <p className="text-center text-sm text-slate-600">
-            Already registered? <Link to="/login" className="font-semibold text-brand-600">Login</Link>
-          </p>
-        </form>
-      </div>
-    </div>
+    <AuthLayout title="Create your account" text="It only takes a minute to get started.">
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <Field label="Full name"><input className="input" required value={form.name} onChange={update('name')} /></Field>
+        <Field label="Email"><input className="input" type="email" required value={form.email} onChange={update('email')} /></Field>
+        <Field label="Phone"><input className="input" value={form.phone} onChange={update('phone')} /></Field>
+        <Field label="Password (min 6 characters)"><input className="input" type="password" required minLength={6}
+          value={form.password} onChange={update('password')} /></Field>
+        <button className="btn w-full !py-3.5" disabled={loading}>{loading ? 'Please wait...' : 'Sign up'}</button>
+        <p className="text-center text-sm text-slate-600">
+          Already registered? <Link to="/login" className="font-semibold text-brand-600">Login</Link>
+        </p>
+      </form>
+    </AuthLayout>
   )
 }

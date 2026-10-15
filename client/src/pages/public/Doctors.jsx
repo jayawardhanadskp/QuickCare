@@ -6,6 +6,8 @@ import api from '../../api/axios'
 import { useAuth } from '../../context/AuthContext'
 import Navbar from '../../components/Navbar'
 import DoctorCard from '../../components/DoctorCard'
+import PageHeader from '../../components/PageHeader'
+import Footer from '../../components/Footer'
 
 // Search and browse all doctors
 export default function Doctors() {
@@ -44,21 +46,24 @@ export default function Doctors() {
   return (
     <div>
       <Navbar />
-      <div className="mx-auto max-w-6xl px-4 py-10">
-        <h1 className="text-3xl font-extrabold">Find a doctor</h1>
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+      <PageHeader title="Find a doctor" text="Search by name, speciality or hospital and book a free time slot.">
+        <div className="mt-6 flex max-w-3xl flex-col gap-3 rounded-2xl bg-white p-3 shadow-xl sm:flex-row">
           <div className="relative flex-1">
-            <Search size={18} className="absolute left-3 top-3 text-slate-400" />
-            <input className="input !pl-10" placeholder="Search by name, speciality or hospital"
+            <Search size={18} className="absolute left-4 top-3.5 text-slate-400" />
+            <input className="input !border-0 !pl-11" placeholder="Search doctors or hospitals"
               value={q} onChange={(e) => setQ(e.target.value)} />
           </div>
-          <select className="input sm:w-56" value={specialization} onChange={(e) => setSpecialization(e.target.value)}>
-            <option value="">All specializations</option>
-            {specializations.map((s) => <option key={s}>{s}</option>)}
-          </select>
+          <div className="sm:w-64">
+            <select className="input" value={specialization} onChange={(e) => setSpecialization(e.target.value)}>
+              <option value="">All specializations</option>
+              {specializations.map((s) => <option key={s}>{s}</option>)}
+            </select>
+          </div>
         </div>
+      </PageHeader>
 
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="container-page py-12">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {doctors.map((d) => (
             <DoctorCard key={d._id} doctor={d}
               isFavourite={favourites.includes(d.user._id)} onToggleFavourite={toggleFavourite} />
@@ -66,6 +71,7 @@ export default function Doctors() {
         </div>
         {doctors.length === 0 && <p className="mt-10 text-center text-slate-500">No doctors found.</p>}
       </div>
+      <Footer />
     </div>
   )
 }
