@@ -11,7 +11,7 @@ const server = http.createServer(app);
 setupSocket(server);
 
 app.use(cors({ origin: process.env.CLIENT_URL }));
-app.use(express.json({ limit: '1mb' }));
+app.use(express.json({ limit: '10mb' }));
 
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/doctors', require('./routes/doctorRoutes'));

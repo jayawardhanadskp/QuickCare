@@ -7,6 +7,8 @@ const healthRecordSchema = new mongoose.Schema({
   category: { type: String, enum: ['condition', 'allergy', 'medication', 'lab result', 'other'], default: 'other' },
   details: { type: String, default: '' },
   date: { type: String, required: true }, // YYYY-MM-DD
+  // PDFs and images saved as data URLs
+  attachments: [{ name: String, mimeType: String, data: String }],
 }, { timestamps: true });
 
 module.exports = mongoose.model('HealthRecord', healthRecordSchema);
