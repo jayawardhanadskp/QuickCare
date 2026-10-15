@@ -26,12 +26,12 @@ export default function AdminOverview() {
 
   return (
     <div>
-      <h1 className="text-2xl font-extrabold">Admin overview</h1>
+      <h1 className="text-3xl font-extrabold">Admin overview</h1>
       <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {cards.map((c) => (
           <div key={c.label} className="card">
-            <c.icon className="text-brand-600" />
-            <p className="mt-2 text-3xl font-extrabold">{c.value}</p>
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50"><c.icon className="text-brand-600" /></span>
+            <p className="mt-4 text-3xl font-extrabold">{c.value}</p>
             <p className="text-sm text-slate-500">{c.label}</p>
           </div>
         ))}

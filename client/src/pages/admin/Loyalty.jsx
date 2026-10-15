@@ -23,7 +23,7 @@ export default function Loyalty() {
 
   return (
     <div>
-      <h1 className="text-2xl font-extrabold">Loyalty points</h1>
+      <h1 className="text-3xl font-extrabold">Loyalty points</h1>
       <p className="mt-1 text-sm text-slate-500">Patients earn 10 points for every completed visit. Use a negative number to remove points.</p>
       <div className="mt-5 space-y-3">
         {patients.map((p) => (

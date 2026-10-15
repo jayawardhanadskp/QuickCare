@@ -41,7 +41,7 @@ export default function Faqs() {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-extrabold">FAQs</h1>
+        <h1 className="text-3xl font-extrabold">FAQs</h1>
         <button className="btn" onClick={() => openForm(null)}><Plus size={16} /> Add FAQ</button>
       </div>
 
@@ -62,8 +62,8 @@ export default function Faqs() {
       </div>
 
       {form && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/40 p-4">
-          <form onSubmit={handleSave} className="card w-full max-w-md space-y-3">
+        <div className="fixed inset-0 z-40 flex items-center justify-center bg-ink-900/60 backdrop-blur-sm p-4">
+          <form onSubmit={handleSave} className="card max-h-[90dvh] w-full max-w-md overflow-y-auto space-y-3">
             <h2 className="text-lg font-bold">{editingId ? 'Edit FAQ' : 'Add FAQ'}</h2>
             <Field label="Question"><input className="input" required value={form.question}
               onChange={(e) => setForm({ ...form, question: e.target.value })} /></Field>

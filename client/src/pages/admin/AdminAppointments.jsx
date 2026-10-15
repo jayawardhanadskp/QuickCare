@@ -26,11 +26,11 @@ export default function AdminAppointments() {
 
   return (
     <div>
-      <h1 className="text-2xl font-extrabold">All appointments</h1>
+      <h1 className="text-3xl font-extrabold">All appointments</h1>
       <div className="mt-4 flex flex-wrap gap-2">
         {['all', 'booked', 'completed', 'cancelled'].map((f) => (
           <button key={f} onClick={() => setFilter(f)}
-            className={`rounded-lg px-4 py-2 text-sm font-semibold capitalize ${filter === f ? 'bg-brand-600 text-white' : 'bg-white text-slate-600'}`}>
+            className={`rounded-xl px-5 py-2.5 text-sm font-semibold capitalize ${filter === f ? 'bg-brand-600 text-white' : 'bg-white text-slate-600 hover:text-brand-700'}`}>
             {f}
           </button>
         ))}
@@ -38,7 +38,7 @@ export default function AdminAppointments() {
 
       <div className="card mt-5 overflow-x-auto !p-0">
         <table className="w-full text-left text-sm">
-          <thead className="border-b border-slate-200 bg-slate-50 text-slate-500">
+          <thead className="border-b border-slate-100 bg-brand-50 text-xs uppercase tracking-wide text-ink-700">
             <tr>
               <th className="px-4 py-3">Date</th>
               <th className="px-4 py-3">Patient</th>

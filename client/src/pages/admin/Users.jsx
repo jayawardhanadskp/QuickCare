@@ -46,14 +46,14 @@ export default function Users() {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-extrabold">Users</h1>
+        <h1 className="text-3xl font-extrabold">Users</h1>
         {role === 'doctor' && <button className="btn" onClick={() => setForm(emptyDoctor)}><Plus size={16} /> Add doctor</button>}
       </div>
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
         {['patient', 'doctor'].map((r) => (
           <button key={r} onClick={() => setRole(r)}
-            className={`rounded-lg px-4 py-2 text-sm font-semibold capitalize ${role === r ? 'bg-brand-600 text-white' : 'bg-white text-slate-600'}`}>
+            className={`rounded-xl px-5 py-2.5 text-sm font-semibold capitalize ${role === r ? 'bg-brand-600 text-white' : 'bg-white text-slate-600 hover:text-brand-700'}`}>
             {r}s
           </button>
         ))}
@@ -65,7 +65,7 @@ export default function Users() {
 
       <div className="card mt-5 overflow-x-auto !p-0">
         <table className="w-full text-left text-sm">
-          <thead className="border-b border-slate-200 bg-slate-50 text-slate-500">
+          <thead className="border-b border-slate-100 bg-brand-50 text-xs uppercase tracking-wide text-ink-700">
             <tr>
               <th className="px-4 py-3">Name</th>
               <th className="px-4 py-3">Email</th>
@@ -99,15 +99,15 @@ export default function Users() {
       </div>
 
       {form && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/40 p-4">
-          <form onSubmit={addDoctor} className="card w-full max-w-md space-y-3">
+        <div className="fixed inset-0 z-40 flex items-center justify-center bg-ink-900/60 backdrop-blur-sm p-4">
+          <form onSubmit={addDoctor} className="card max-h-[90dvh] w-full max-w-md overflow-y-auto space-y-3">
             <h2 className="text-lg font-bold">Add doctor</h2>
             <Field label="Full name"><input className="input" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} /></Field>
             <Field label="Email"><input className="input" type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} /></Field>
             <Field label="Password (min 6 characters)"><input className="input" type="password" required value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} /></Field>
             <Field label="Phone"><input className="input" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} /></Field>
             <Field label="Specialization"><input className="input" required value={form.specialization} onChange={(e) => setForm({ ...form, specialization: e.target.value })} /></Field>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid gap-3 sm:grid-cols-2">
               <Field label="Fee (LKR)"><input className="input" type="number" min="0" value={form.fee} onChange={(e) => setForm({ ...form, fee: e.target.value })} /></Field>
               <Field label="Hospital"><input className="input" value={form.hospital} onChange={(e) => setForm({ ...form, hospital: e.target.value })} /></Field>
             </div>

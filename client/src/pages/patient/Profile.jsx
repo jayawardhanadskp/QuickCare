@@ -23,7 +23,7 @@ export default function PatientProfile() {
 
   return (
     <div className="max-w-2xl space-y-5">
-      <h1 className="text-2xl font-extrabold">My profile</h1>
+      <h1 className="text-3xl font-extrabold">My profile</h1>
       <div className="card"><PictureUpload /></div>
       <form onSubmit={handleSubmit} className="card grid gap-4 sm:grid-cols-2">
         <Field label="Full name"><input className="input" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} /></Field>

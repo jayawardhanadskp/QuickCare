@@ -11,7 +11,7 @@ export default function Reviews() {
 
   return (
     <div>
-      <h1 className="text-2xl font-extrabold">My reviews</h1>
+      <h1 className="text-3xl font-extrabold">My reviews</h1>
       <div className="card mt-5 flex items-center gap-4">
         <p className="text-4xl font-extrabold">{average.toFixed(1)}</p>
         <div>

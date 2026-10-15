@@ -27,11 +27,11 @@ export default function Schedule() {
 
   return (
     <div>
-      <h1 className="text-2xl font-extrabold">My schedule</h1>
+      <h1 className="text-3xl font-extrabold">My schedule</h1>
       <div className="mt-4 flex flex-wrap gap-2">
         {['booked', 'completed', 'cancelled', 'all'].map((f) => (
           <button key={f} onClick={() => setFilter(f)}
-            className={`rounded-lg px-4 py-2 text-sm font-semibold capitalize ${filter === f ? 'bg-brand-600 text-white' : 'bg-white text-slate-600'}`}>
+            className={`rounded-xl px-5 py-2.5 text-sm font-semibold capitalize ${filter === f ? 'bg-brand-600 text-white' : 'bg-white text-slate-600 hover:text-brand-700'}`}>
             {f}
           </button>
         ))}
