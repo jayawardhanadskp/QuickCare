@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { io } from 'socket.io-client'
-import { Send } from 'lucide-react'
+import { Send, ArrowLeft } from 'lucide-react'
 import api from '../../api/axios'
 import { useAuth } from '../../context/AuthContext'
 
@@ -18,7 +18,7 @@ export default function Chat() {
   // Connect once with the login token
   useEffect(() => {
     api.get('/chat/contacts').then((res) => setContacts(res.data))
-    const socket = io('http://localhost:5001', { auth: { token: localStorage.getItem('token') } })
+    const socket = io({ auth: { token: localStorage.getItem('token') } })
     socketRef.current = socket
 
     // Show a new message only if it belongs to the open conversation
@@ -50,12 +50,12 @@ export default function Chat() {
 
   return (
     <div>
-      <h1 className="text-2xl font-extrabold">Messages</h1>
-      <div className="card mt-5 flex h-[28rem] overflow-hidden !p-0">
-        <div className="w-28 shrink-0 overflow-y-auto border-r border-slate-200 sm:w-60">
+      <h1 className="text-3xl font-extrabold">Messages</h1>
+      <div className="card mt-5 flex h-[calc(100dvh-13rem)] min-h-[26rem] overflow-hidden !p-0 sm:h-[32rem]">
+        <div className={`w-full shrink-0 overflow-y-auto border-r border-slate-200 sm:block sm:w-64 ${active ? 'hidden' : 'block'}`}>
           {contacts.map((c) => (
             <button key={c._id} onClick={() => openChat(c)} translate="no"
-              className={`block w-full px-4 py-3 text-left text-sm font-semibold ${active?._id === c._id ? 'bg-brand-50 text-brand-700' : 'hover:bg-slate-50'}`}>
+              className={`block w-full px-4 py-4 text-left text-sm font-semibold ${active?._id === c._id ? 'bg-brand-50 text-brand-700' : 'hover:bg-slate-50'}`}>
               {c.name}
             </button>
           ))}
@@ -68,13 +68,16 @@ export default function Chat() {
 
         {active ? (
           <div className="flex min-w-0 flex-1 flex-col">
-            <p translate="no" className="border-b border-slate-200 px-4 py-3 font-bold">{active.name}</p>
+            <div className="flex items-center gap-2 border-b border-slate-200 px-3 py-3">
+              <button onClick={() => setActive(null)} aria-label="Back" className="flex h-9 w-9 items-center justify-center rounded-lg text-ink-800 hover:bg-slate-100 sm:hidden"><ArrowLeft size={20} /></button>
+              <p translate="no" className="font-bold">{active.name}</p>
+            </div>
             <div className="flex-1 space-y-2 overflow-y-auto bg-slate-50 p-4">
               {messages.map((m) => {
                 const mine = m.sender === user._id
                 return (
                   <div key={m._id} className={`flex ${mine ? 'justify-end' : ''}`}>
-                    <p className={`max-w-xs rounded-2xl px-3 py-2 text-sm ${mine ? 'bg-brand-600 text-white' : 'bg-white shadow-sm'}`}>{m.text}</p>
+                    <p className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm ${mine ? 'bg-brand-600 text-white' : 'bg-white shadow-sm'}`}>{m.text}</p>
                   </div>
                 )
               })}
@@ -87,7 +90,7 @@ export default function Chat() {
             </form>
           </div>
         ) : (
-          <p className="m-auto px-2 text-center text-slate-400">Choose someone to start chatting</p>
+          <p className="m-auto hidden px-2 text-center text-slate-400 sm:block">Choose someone to start chatting</p>
         )}
       </div>
     </div>
