@@ -23,7 +23,7 @@ export default function SlotPicker({ doctorId, ignoreId, date, time, onChange })
           : <div className="flex flex-wrap gap-2">
               {slots.map((s) => (
                 <button type="button" key={s} onClick={() => onChange({ date, time: s })}
-                  className={`rounded-lg border px-3 py-1.5 text-sm font-medium ${time === s ? 'border-brand-600 bg-brand-600 text-white' : 'border-slate-300 bg-white hover:border-brand-500'}`}>
+                  className={`rounded-xl border px-3.5 py-2 text-sm font-medium ${time === s ? 'border-brand-600 bg-brand-600 text-white' : 'border-slate-200 bg-white hover:border-brand-500'}`}>
                   {s}
                 </button>
               ))}
