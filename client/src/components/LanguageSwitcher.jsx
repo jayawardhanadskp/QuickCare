@@ -40,12 +40,13 @@ export default function LanguageSwitcher({ light }) {
     <div className="flex items-center gap-1.5">
       <Globe size={16} className={light ? 'text-slate-300' : 'text-slate-500'} />
       <select
+        translate="no"
         value={getCurrent()}
         onChange={(e) => changeLanguage(e.target.value)}
         className="rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-xs text-slate-700"
       >
         {languages.map((l) => (
-          <option key={l.code} value={l.code}>{l.label}</option>
+          <option key={l.code} value={l.code} translate="no">{l.label}</option>
         ))}
       </select>
       <div id="google_translate_element" className="hidden" />

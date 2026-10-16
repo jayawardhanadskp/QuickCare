@@ -52,7 +52,7 @@ export default function DashboardLayout() {
         <div className="mb-8 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 text-xl font-extrabold text-white">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-500"><HeartPulse size={20} /></span>
-            QuickCare
+            <span translate="no">QuickCare</span>
           </Link>
           <button onClick={() => setOpen(false)} aria-label="Close menu" className="text-slate-300 hover:text-white md:hidden"><X size={22} /></button>
         </div>
@@ -85,7 +85,7 @@ export default function DashboardLayout() {
             </button>
             <Link to="/" className="flex items-center gap-2 font-extrabold text-ink-900">
               <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white"><HeartPulse size={18} /></span>
-              QuickCare
+              <span translate="no">QuickCare</span>
             </Link>
           </div>
           <div className="hidden items-center gap-3 md:flex">

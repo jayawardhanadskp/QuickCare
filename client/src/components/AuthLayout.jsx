@@ -11,7 +11,7 @@ export default function AuthLayout({ title, text, children }) {
         <div className="relative flex h-full flex-col justify-between p-12">
           <Link to="/" className="flex items-center gap-2 text-xl font-extrabold text-white">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-500"><HeartPulse size={20} /></span>
-            QuickCare
+            <span translate="no">QuickCare</span>
           </Link>
           <div>
             <h2 className="text-4xl font-extrabold leading-tight !text-white">Book your doctor in a few clicks</h2>
@@ -24,7 +24,7 @@ export default function AuthLayout({ title, text, children }) {
         <div className="w-full max-w-md">
           <Link to="/" className="mb-8 flex items-center gap-2 text-xl font-extrabold text-ink-900 lg:hidden">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-600 text-white"><HeartPulse size={20} /></span>
-            QuickCare
+            <span translate="no">QuickCare</span>
           </Link>
           <h1 className="text-3xl font-extrabold">{title}</h1>
           <p className="mt-2 text-slate-500">{text}</p>

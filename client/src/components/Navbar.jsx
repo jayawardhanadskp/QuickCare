@@ -37,7 +37,7 @@ export default function Navbar() {
         <div className="container-page flex h-16 items-center justify-between sm:h-[72px]">
           <Link to="/" className="flex shrink-0 items-center gap-2 text-xl font-extrabold text-white">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-500 text-white"><HeartPulse size={20} /></span>
-            QuickCare
+            <span translate="no">QuickCare</span>
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex">

@@ -9,7 +9,7 @@ export default function Footer() {
         <div>
           <Link to="/" className="flex items-center gap-2 text-xl font-extrabold text-white">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-500"><HeartPulse size={20} /></span>
-            QuickCare
+            <span translate="no">QuickCare</span>
           </Link>
           <p className="mt-4 text-sm leading-relaxed">Find a trusted doctor, book a time that suits you and keep your health records in one place.</p>
         </div>
@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 py-5 text-center text-xs text-slate-400">
-        © {new Date().getFullYear()} QuickCare. All rights reserved.
+        © {new Date().getFullYear()} <span translate="no">QuickCare</span>. All rights reserved.
       </div>
     </footer>
   )

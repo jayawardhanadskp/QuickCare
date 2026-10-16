@@ -46,7 +46,7 @@ export default function Home() {
               Your health, <span className="text-brand-600">in expert hands</span>
             </h1>
             <p className="mt-5 max-w-lg text-lg leading-relaxed text-slate-600">
-              QuickCare makes it simple to find a doctor, book an appointment and keep track of your health, all in one place.
+              <span translate="no">QuickCare</span> makes it simple to find a doctor, book an appointment and keep track of your health, all in one place.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/doctors" className="btn !px-6 !py-3.5">Book an appointment <ArrowRight size={16} /></Link>
@@ -116,7 +116,7 @@ export default function Home() {
           </div>
 
           <div className="pt-6 lg:pt-0">
-            <p className="eyebrow">About QuickCare</p>
+            <p className="eyebrow">About <span translate="no">QuickCare</span></p>
             <h2 className="mt-3 text-3xl font-extrabold leading-tight sm:text-4xl">Care that fits around your day</h2>
             <p className="mt-4 leading-relaxed text-slate-600">
               Skip the phone calls and the waiting room queues. Choose a doctor, see their free times and book in a few clicks.
