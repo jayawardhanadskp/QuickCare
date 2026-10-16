@@ -34,7 +34,7 @@ export default function Doctors() {
   }, [user])
 
   const toggleFavourite = async (id) => {
-    if (!user) return navigate('/login')
+    if (!user) return navigate('/login/patient')
     try {
       const res = await api.post(`/doctors/${id}/favourite`)
       setFavourites(res.data.favourite ? [...favourites, id] : favourites.filter((f) => f !== id))

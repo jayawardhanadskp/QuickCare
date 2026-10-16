@@ -5,6 +5,8 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Home from './pages/public/Home'
 import Login from './pages/public/Login'
 import Register from './pages/public/Register'
+import ForgotPassword from './pages/public/ForgotPassword'
+import ResetPassword from './pages/public/ResetPassword'
 import Doctors from './pages/public/Doctors'
 import DoctorDetail from './pages/public/DoctorDetail'
 import Faq from './pages/public/Faq'
@@ -34,7 +36,10 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/login/:role" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/doctors" element={<Doctors />} />
           <Route path="/doctors/:id" element={<DoctorDetail />} />
           <Route path="/faq" element={<Faq />} />

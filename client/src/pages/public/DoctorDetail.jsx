@@ -32,7 +32,7 @@ export default function DoctorDetail() {
 
   const handleBook = async (e) => {
     e.preventDefault()
-    if (!user) return navigate('/login')
+    if (!user) return navigate('/login/patient')
     if (!slot.time) return toast.error('Please pick a time slot')
     setLoading(true)
     try {

@@ -13,7 +13,7 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (res) => res,
   (err) => {
-    const onLogin = window.location.pathname === '/login'
+    const onLogin = window.location.pathname.startsWith('/login')
     if (err.response?.status === 401 && !onLogin) {
       localStorage.removeItem('token')
       localStorage.removeItem('user')

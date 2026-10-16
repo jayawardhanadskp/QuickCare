@@ -36,7 +36,7 @@ export default function Register() {
           value={form.password} onChange={update('password')} /></Field>
         <button className="btn w-full !py-3.5" disabled={loading}>{loading ? 'Please wait...' : 'Sign up'}</button>
         <p className="text-center text-sm text-slate-600">
-          Already registered? <Link to="/login" className="font-semibold text-brand-600">Login</Link>
+          Already registered? <Link to="/login/patient" className="font-semibold text-brand-600">Login</Link>
         </p>
       </form>
     </AuthLayout>
