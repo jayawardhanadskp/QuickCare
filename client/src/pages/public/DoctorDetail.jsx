@@ -8,6 +8,7 @@ import Navbar from '../../components/Navbar'
 import Avatar from '../../components/Avatar'
 import StarRating from '../../components/StarRating'
 import SlotPicker from '../../components/SlotPicker'
+import PayPalCheckout from '../../components/PayPalCheckout'
 import PageHeader from '../../components/PageHeader'
 import Footer from '../../components/Footer'
 
@@ -67,7 +68,7 @@ export default function DoctorDetail() {
             <p className="flex items-center gap-2"><Stethoscope size={16} className="text-brand-600" /> {doctor.specialization}</p>
             <p className="flex items-center gap-2"><MapPin size={16} className="text-brand-600" /> {doctor.hospital}</p>
             <p className="flex items-center gap-2"><Briefcase size={16} className="text-brand-600" /> {doctor.experience} years of experience</p>
-            <p className="flex items-center gap-2"><Banknote size={16} className="text-brand-600" /> LKR {doctor.fee} (paid at the clinic)</p>
+            <p className="flex items-center gap-2"><Banknote size={16} className="text-brand-600" /> LKR {doctor.fee} (paid online with PayPal)</p>
           </div>
           <h2 className="mt-8 text-lg font-bold">About</h2>
           <p className="mt-1 text-sm text-slate-600">{doctor.bio}</p>
@@ -98,7 +99,9 @@ export default function DoctorDetail() {
                 <SlotPicker doctorId={id} date={slot.date} time={slot.time} onChange={setSlot} />
                 <textarea className="input" rows="3" placeholder="Reason for visit (optional)"
                   value={reason} onChange={(e) => setReason(e.target.value)} />
-                <button className="btn w-full" disabled={loading}>{user ? 'Confirm booking' : 'Login to book'}</button>
+                {user && doctor.fee > 0
+                  ? <PayPalCheckout doctorId={id} slot={slot} reason={reason} onBooked={() => navigate('/patient/appointments')} />
+                  : <button className="btn w-full" disabled={loading}>{user ? 'Confirm booking' : 'Login to book'}</button>}
               </>}
         </form>
       </div>

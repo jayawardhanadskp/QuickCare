@@ -6,6 +6,8 @@ const appointmentSchema = new mongoose.Schema({
   date: { type: String, required: true }, // YYYY-MM-DD
   time: { type: String, required: true }, // HH:MM
   reason: { type: String, default: '' },
+  paid: { type: Boolean, default: false },
+  paypalOrderId: { type: String, default: '' },
   status: { type: String, enum: ['booked', 'completed', 'cancelled'], default: 'booked' },
 }, { timestamps: true });
 

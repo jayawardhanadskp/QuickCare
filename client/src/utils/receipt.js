@@ -27,9 +27,10 @@ export function downloadReceipt(a) {
   line('Time:', a.time, 100)
   line('Status:', a.status, 110)
   line('Consultation fee:', `LKR ${a.fee}`, 120)
+  line('Payment:', a.paid ? 'Paid with PayPal' : 'Pay at the clinic', 130)
 
   pdf.setFontSize(10)
   pdf.setTextColor(120)
-  pdf.text('The fee is paid at the clinic. Thank you for choosing QuickCare.', 20, 140)
+  pdf.text('Thank you for choosing QuickCare.', 20, 150)
   pdf.save(`receipt-${a._id.slice(-8)}.pdf`)
 }

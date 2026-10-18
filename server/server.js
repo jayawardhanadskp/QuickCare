@@ -21,6 +21,7 @@ app.use('/api/reviews', require('./routes/reviewRoutes'));
 app.use('/api/faqs', require('./routes/faqRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/chat', require('./routes/chatRoutes'));
+app.use('/api/payments', require('./routes/paymentRoutes'));
 
 app.get('/', (req, res) => res.send('QuickCare API is running'));
 
