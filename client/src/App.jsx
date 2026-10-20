@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
+import SupportChatbot from './components/SupportChatbot'
 import Home from './pages/public/Home'
 import Login from './pages/public/Login'
 import Register from './pages/public/Register'
@@ -19,6 +20,7 @@ import Users from './pages/admin/Users'
 import AdminAppointments from './pages/admin/AdminAppointments'
 import Loyalty from './pages/admin/Loyalty'
 import Faqs from './pages/admin/Faqs'
+import Support from './pages/admin/Support'
 import DashboardLayout from './components/DashboardLayout'
 import PatientOverview from './pages/patient/Overview'
 import Appointments from './pages/patient/Appointments'
@@ -70,8 +72,10 @@ export default function App() {
             <Route path="loyalty" element={<Loyalty />} />
             <Route path="records" element={<HealthRecords />} />
             <Route path="faqs" element={<Faqs />} />
+            <Route path="support" element={<Support />} />
           </Route>
         </Routes>
+        <SupportChatbot />
       </BrowserRouter>
     </AuthProvider>
   )

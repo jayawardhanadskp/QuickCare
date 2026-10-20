@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { NavLink, Outlet, Link, useNavigate } from 'react-router-dom'
-import { HeartPulse, LogOut, LayoutDashboard, CalendarDays, Heart, UserRound, FileText, Star, CircleHelp, MessageCircle, Users, Gift, Menu, X } from 'lucide-react'
+import { HeartPulse, LogOut, LayoutDashboard, CalendarDays, Heart, UserRound, FileText, Star, CircleHelp, MessageCircle, Headset, Users, Gift, Menu, X } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import Avatar from './Avatar'
 import LanguageSwitcher from './LanguageSwitcher'
@@ -31,6 +31,7 @@ const menus = {
     { to: '/admin/loyalty', label: 'Loyalty points', icon: Gift },
     { to: '/admin/records', label: 'Health records', icon: FileText },
     { to: '/admin/faqs', label: 'FAQs', icon: CircleHelp },
+    { to: '/admin/support', label: 'Support', icon: Headset },
   ],
 }
 
