@@ -11,6 +11,8 @@ const userSchema = new mongoose.Schema(
     avatar: { type: String, default: '' },
     isActive: { type: Boolean, default: true },
     loyaltyPoints: { type: Number, default: 0 },
+    resetToken: { type: String, default: '' },
+    resetExpires: { type: Date },
   },
   { timestamps: true }
 );

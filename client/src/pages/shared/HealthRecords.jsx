@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-import { Plus, Pencil, Trash2 } from 'lucide-react'
+import { Plus, Pencil, Trash2, Paperclip, FileText, X } from 'lucide-react'
 import Field from '../../components/Field'
 import api from '../../api/axios'
 import { useAuth } from '../../context/AuthContext'
 
 const categories = ['condition', 'allergy', 'medication', 'lab result', 'other']
 const today = () => new Date().toISOString().slice(0, 10)
-const emptyForm = { title: '', category: 'condition', details: '', date: today() }
+const emptyForm = { title: '', category: 'condition', details: '', date: today(), attachments: [] }
 
 // Health records page used by patients, doctors and admins
 export default function HealthRecords() {
@@ -33,8 +33,25 @@ export default function HealthRecords() {
   const openAdd = () => { setEditingId(null); setForm(emptyForm) }
   const openEdit = (r) => {
     setEditingId(r._id)
-    setForm({ title: r.title, category: r.category, details: r.details, date: r.date })
+    setForm({ title: r.title, category: r.category, details: r.details, date: r.date, attachments: r.attachments || [] })
   }
+
+  // Read chosen PDFs and images into the form (max 3 files, 2MB each)
+  const addFiles = (e) => {
+    const chosen = Array.from(e.target.files)
+    e.target.value = ''
+    for (const file of chosen) {
+      if (form.attachments.length + 1 > 3) return toast.error('You can attach up to 3 files')
+      if (!file.type.startsWith('image/') && file.type !== 'application/pdf') return toast.error('Only PDF and image files are allowed')
+      if (file.size > 2 * 1024 * 1024) return toast.error(`${file.name} is bigger than 2MB`)
+      const reader = new FileReader()
+      reader.onload = () => setForm((f) => f.attachments.length >= 3 ? f
+        : { ...f, attachments: [...f.attachments, { name: file.name, mimeType: file.type, data: reader.result }] })
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const removeFile = (index) => setForm({ ...form, attachments: form.attachments.filter((_, i) => i !== index) })
 
   const handleSave = async (e) => {
     e.preventDefault()
@@ -62,7 +79,7 @@ export default function HealthRecords() {
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-extrabold">Health records</h1>
+        <h1 className="text-3xl font-extrabold">Health records</h1>
         {(isPatient || patientId) && <button className="btn" onClick={openAdd}><Plus size={16} /> Add record</button>}
       </div>
 
@@ -84,6 +101,19 @@ export default function HealthRecords() {
                 {r.date} · added by <span translate="no">{r.createdBy.name}</span>
               </p>
               {r.details && <p className="mt-1 text-sm text-slate-600">{r.details}</p>}
+              {r.attachments?.length > 0 && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {r.attachments.map((f, i) => (
+                    <a key={i} href={f.data} download={f.name} title={f.name}
+                      className="flex max-w-full items-center gap-2 rounded-xl border border-slate-200 p-1.5 pr-3 text-xs font-medium text-ink-800 hover:bg-slate-50">
+                      {f.mimeType.startsWith('image/')
+                        ? <img src={f.data} alt={f.name} className="h-10 w-10 rounded-lg object-cover" />
+                        : <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-50 text-red-600"><FileText size={20} /></span>}
+                      <span className="max-w-[9rem] truncate" translate="no">{f.name}</span>
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="flex gap-2">
               {canEdit(r) && <button className="btn-outline !py-1.5" onClick={() => openEdit(r)}><Pencil size={16} /> Edit</button>}
@@ -99,12 +129,12 @@ export default function HealthRecords() {
       </div>
 
       {form && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/40 p-4">
-          <form onSubmit={handleSave} className="card w-full max-w-md space-y-3">
+        <div className="fixed inset-0 z-40 flex items-center justify-center bg-ink-900/60 backdrop-blur-sm p-4">
+          <form onSubmit={handleSave} className="card max-h-[90dvh] w-full max-w-md overflow-y-auto space-y-3">
             <h2 className="text-lg font-bold">{editingId ? 'Edit record' : 'Add record'}</h2>
             <Field label="Title"><input className="input" required value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })} /></Field>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid gap-3 sm:grid-cols-2">
               <Field label="Category">
                 <select className="input capitalize" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })}>
                   {categories.map((c) => <option key={c}>{c}</option>)}
@@ -115,6 +145,21 @@ export default function HealthRecords() {
             </div>
             <Field label="Details"><textarea className="input" rows="4" value={form.details}
               onChange={(e) => setForm({ ...form, details: e.target.value })} /></Field>
+            <Field label="Attachments (PDF or image, up to 3 files, 2MB each)">
+              <input type="file" accept="image/*,application/pdf" multiple onChange={addFiles}
+                disabled={form.attachments.length >= 3} className="input !p-2 text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-brand-50 file:px-3 file:py-1.5 file:font-semibold file:text-brand-700" />
+            </Field>
+            {form.attachments.length > 0 && (
+              <ul className="space-y-2">
+                {form.attachments.map((f, i) => (
+                  <li key={i} className="flex items-center gap-2 rounded-xl bg-slate-50 px-3 py-2 text-sm">
+                    <Paperclip size={14} className="shrink-0 text-slate-400" />
+                    <span className="min-w-0 flex-1 truncate" translate="no">{f.name}</span>
+                    <button type="button" aria-label="Remove file" onClick={() => removeFile(i)} className="text-slate-400 hover:text-red-600"><X size={16} /></button>
+                  </li>
+                ))}
+              </ul>
+            )}
             <div className="flex justify-end gap-2">
               <button type="button" className="btn-outline" onClick={() => setForm(null)}>Close</button>
               <button className="btn">Save</button>

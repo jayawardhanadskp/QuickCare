@@ -22,7 +22,7 @@ export default function Favourites() {
 
   return (
     <div>
-      <h1 className="text-2xl font-extrabold">Favourite doctors</h1>
+      <h1 className="text-3xl font-extrabold">Favourite doctors</h1>
       <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
         {doctors.map((d) => <DoctorCard key={d._id} doctor={d} isFavourite={ids.includes(d.user._id)} onToggleFavourite={remove} />)}
       </div>

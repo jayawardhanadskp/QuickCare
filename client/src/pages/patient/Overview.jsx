@@ -20,12 +20,12 @@ export default function PatientOverview() {
 
   return (
     <div>
-      <h1 className="text-2xl font-extrabold">Hello, <span translate="no">{user.name}</span></h1>
+      <h1 className="text-3xl font-extrabold">Hello, <span translate="no">{user.name}</span></h1>
       <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="card"><CalendarDays className="text-brand-600" /><p className="mt-2 text-3xl font-extrabold">{upcoming.length}</p><p className="text-sm text-slate-500">Upcoming appointments</p></div>
-        <div className="card"><CheckCircle2 className="text-brand-600" /><p className="mt-2 text-3xl font-extrabold">{list.filter((a) => a.status === 'completed').length}</p><p className="text-sm text-slate-500">Completed visits</p></div>
-        <div className="card"><Gift className="text-brand-600" /><p className="mt-2 text-3xl font-extrabold">{points}</p><p className="text-sm text-slate-500">Loyalty points</p></div>
-        <Link to="/doctors" className="card flex flex-col justify-between hover:border-brand-500"><Search className="text-brand-600" /><p className="mt-2 font-bold">Find a doctor</p><p className="text-sm text-slate-500">Search and book</p></Link>
+        <div className="card"><span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50"><CalendarDays className="text-brand-600" /></span><p className="mt-4 text-3xl font-extrabold">{upcoming.length}</p><p className="text-sm text-slate-500">Upcoming appointments</p></div>
+        <div className="card"><span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50"><CheckCircle2 className="text-brand-600" /></span><p className="mt-4 text-3xl font-extrabold">{list.filter((a) => a.status === 'completed').length}</p><p className="text-sm text-slate-500">Completed visits</p></div>
+        <div className="card"><span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50"><Gift className="text-brand-600" /></span><p className="mt-4 text-3xl font-extrabold">{points}</p><p className="text-sm text-slate-500">Loyalty points</p></div>
+        <Link to="/doctors" className="card flex flex-col justify-between hover:border-brand-500"><span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50"><Search className="text-brand-600" /></span><p className="mt-2 font-bold">Find a doctor</p><p className="text-sm text-slate-500">Search and book</p></Link>
       </div>
       <div className="card mt-6">
         <h2 className="font-bold">Next appointment</h2>

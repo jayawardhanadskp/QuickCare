@@ -15,6 +15,10 @@ const bookAppointment = async (req, res) => {
   const free = await getFreeSlots(doctor, date);
   if (!free.includes(time)) return res.status(400).json({ message: 'That time slot is not available' });
 
+  // Doctors with a fee are booked through the PayPal checkout instead
+  const profile = await DoctorProfile.findOne({ user: doctor });
+  if (profile && profile.fee > 0) return res.status(400).json({ message: 'Please pay the consultation fee to book' });
+
   const appointment = await Appointment.create({ patient: req.user._id, doctor, date, time, reason });
   notifyAppointment(appointment, 'booked');
   res.status(201).json(appointment);

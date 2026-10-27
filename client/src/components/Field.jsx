@@ -2,7 +2,7 @@
 export default function Field({ label, className = '', children }) {
   return (
     <label className={`block ${className}`}>
-      <span className="mb-1 block text-sm font-medium text-slate-700">{label}</span>
+      <span className="mb-1.5 block text-sm font-semibold text-ink-800">{label}</span>
       {children}
     </label>
   )

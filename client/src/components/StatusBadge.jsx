@@ -6,5 +6,5 @@ const styles = {
 }
 
 export default function StatusBadge({ status }) {
-  return <span className={`rounded-full px-2.5 py-1 text-xs font-semibold capitalize ${styles[status]}`}>{status}</span>
+  return <span className={`rounded-full px-3 py-1 text-xs font-semibold capitalize ${styles[status]}`}>{status}</span>
 }

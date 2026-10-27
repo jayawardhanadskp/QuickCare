@@ -10,6 +10,18 @@ const canAccessPatient = async (user, patientId) => {
   return !!(await Appointment.exists({ doctor: user._id, patient: patientId }));
 };
 
+// Keep only PDFs and images, max 3 files of about 2MB each
+const cleanFiles = (files) => {
+  if (!Array.isArray(files)) return [];
+  if (files.length > 3) throw Object.assign(new Error('You can attach up to 3 files'), { name: 'ValidationError' });
+  return files.map((f) => {
+    const ok = typeof f.data === 'string' && /^data:(image\/[a-z+.-]+|application\/pdf);base64,/.test(f.data);
+    if (!ok) throw Object.assign(new Error('Only PDF and image files are allowed'), { name: 'ValidationError' });
+    if (f.data.length > 2.8 * 1024 * 1024) throw Object.assign(new Error('Each file must be under 2MB'), { name: 'ValidationError' });
+    return { name: String(f.name || 'file').slice(0, 100), mimeType: f.mimeType, data: f.data };
+  });
+};
+
 // Patients the doctor has seen (admin gets every patient)
 const myPatients = async (req, res) => {
   if (req.user.role === 'admin') {
@@ -33,13 +45,13 @@ const listRecords = async (req, res) => {
 
 // Add a record
 const addRecord = async (req, res) => {
-  const { title, category, details, date } = req.body;
+  const { title, category, details, date, attachments } = req.body;
   const patientId = req.user.role === 'patient' ? req.user._id : req.body.patient;
   if (!patientId || !title || !date) return res.status(400).json({ message: 'Patient, title and date are required' });
   if (!(await canAccessPatient(req.user, patientId))) {
     return res.status(403).json({ message: 'You do not have access to this patient' });
   }
-  const record = await HealthRecord.create({ patient: patientId, createdBy: req.user._id, title, category, details, date });
+  const record = await HealthRecord.create({ patient: patientId, createdBy: req.user._id, title, category, details, date, attachments: cleanFiles(attachments) });
   res.status(201).json(record);
 };
 
@@ -53,11 +65,12 @@ const updateRecord = async (req, res) => {
   if (req.user.role === 'patient' && String(record.createdBy) !== String(req.user._id)) {
     return res.status(403).json({ message: 'You can only edit your own entries' });
   }
-  const { title, category, details, date } = req.body;
+  const { title, category, details, date, attachments } = req.body;
   if (title) record.title = title;
   if (category) record.category = category;
   if (date) record.date = date;
   if (details !== undefined) record.details = details;
+  if (attachments !== undefined) record.attachments = cleanFiles(attachments);
   await record.save();
   res.json(record);
 };

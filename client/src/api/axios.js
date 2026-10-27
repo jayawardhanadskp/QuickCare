@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const api = axios.create({ baseURL: 'http://localhost:5001/api' })
+const api = axios.create({ baseURL: '/api' })
 
 // Send the token with every request
 api.interceptors.request.use((config) => {
@@ -13,7 +13,7 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (res) => res,
   (err) => {
-    const onLogin = window.location.pathname === '/login'
+    const onLogin = window.location.pathname.startsWith('/login')
     if (err.response?.status === 401 && !onLogin) {
       localStorage.removeItem('token')
       localStorage.removeItem('user')

@@ -2,30 +2,51 @@
 
 @theme {
   --font-sans: "Plus Jakarta Sans", sans-serif;
-  --color-brand-50: #f0fdfa;
-  --color-brand-100: #ccfbf1;
+  --color-brand-50: #effaf8;
+  --color-brand-100: #d3f3ee;
   --color-brand-500: #14b8a6;
   --color-brand-600: #0d9488;
   --color-brand-700: #0f766e;
+  /* deep teal used for headings, navbar and sidebar */
+  --color-ink-700: #134352;
+  --color-ink-800: #0d3340;
+  --color-ink-900: #082530;
 }
 
 body {
-  background: #f8fafc;
-  color: #0f172a;
+  background: #f5fafa;
+  color: #0b2b36;
+}
+
+h1, h2, h3 {
+  color: #082530;
 }
 
 /* Reusable bits */
 .btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-700 disabled:opacity-60;
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm shadow-brand-600/30 transition hover:bg-brand-700 disabled:opacity-60;
+}
+.btn-dark {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl bg-ink-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-ink-700;
 }
 .btn-outline {
-  @apply inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50;
+  @apply inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-ink-800 transition hover:border-brand-500 hover:text-brand-700;
 }
 .input {
-  @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100;
+  @apply w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-base outline-none sm:text-sm transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100;
 }
 .card {
-  @apply rounded-xl border border-slate-200 bg-white p-5 shadow-sm;
+  @apply rounded-2xl border border-slate-100 bg-white p-6 shadow-[0_4px_24px_rgba(8,37,48,0.06)];
+}
+
+/* Small label above a section heading */
+.eyebrow {
+  @apply text-sm font-bold uppercase tracking-widest text-brand-600;
+}
+
+/* Page content width for public pages */
+.container-page {
+  @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
 }
 
 /* Hide the Google Translate banner and keep page in place */

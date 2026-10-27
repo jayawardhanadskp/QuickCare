@@ -19,7 +19,8 @@ const changeLanguage = (code) => {
   window.location.reload()
 }
 
-export default function LanguageSwitcher() {
+// light = used on the dark navbar
+export default function LanguageSwitcher({ light }) {
   // Load the free Google Website Translator once
   useEffect(() => {
     if (document.getElementById('gt-script')) return
@@ -37,14 +38,15 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="flex items-center gap-1.5">
-      <Globe size={16} className="text-slate-500" />
+      <Globe size={16} className={light ? 'text-slate-300' : 'text-slate-500'} />
       <select
+        translate="no"
         value={getCurrent()}
         onChange={(e) => changeLanguage(e.target.value)}
-        className="rounded-md border border-slate-300 bg-white px-2 py-1 text-xs"
+        className="rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-xs text-slate-700"
       >
         {languages.map((l) => (
-          <option key={l.code} value={l.code}>{l.label}</option>
+          <option key={l.code} value={l.code} translate="no">{l.label}</option>
         ))}
       </select>
       <div id="google_translate_element" className="hidden" />

@@ -2,9 +2,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
+import SupportChatbot from './components/SupportChatbot'
 import Home from './pages/public/Home'
 import Login from './pages/public/Login'
 import Register from './pages/public/Register'
+import ForgotPassword from './pages/public/ForgotPassword'
+import ResetPassword from './pages/public/ResetPassword'
 import Doctors from './pages/public/Doctors'
 import DoctorDetail from './pages/public/DoctorDetail'
 import Faq from './pages/public/Faq'
@@ -17,6 +20,7 @@ import Users from './pages/admin/Users'
 import AdminAppointments from './pages/admin/AdminAppointments'
 import Loyalty from './pages/admin/Loyalty'
 import Faqs from './pages/admin/Faqs'
+import Support from './pages/admin/Support'
 import DashboardLayout from './components/DashboardLayout'
 import PatientOverview from './pages/patient/Overview'
 import Appointments from './pages/patient/Appointments'
@@ -34,7 +38,10 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/login/:role" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/doctors" element={<Doctors />} />
           <Route path="/doctors/:id" element={<DoctorDetail />} />
           <Route path="/faq" element={<Faq />} />
@@ -65,8 +72,10 @@ export default function App() {
             <Route path="loyalty" element={<Loyalty />} />
             <Route path="records" element={<HealthRecords />} />
             <Route path="faqs" element={<Faqs />} />
+            <Route path="support" element={<Support />} />
           </Route>
         </Routes>
+        <SupportChatbot />
       </BrowserRouter>
     </AuthProvider>
   )

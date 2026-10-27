@@ -15,10 +15,10 @@ export default function DoctorOverview() {
 
   return (
     <div>
-      <h1 className="text-2xl font-extrabold">Hello, <span translate="no">{user.name}</span></h1>
+      <h1 className="text-3xl font-extrabold">Hello, <span translate="no">{user.name}</span></h1>
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
-        <div className="card"><CalendarDays className="text-brand-600" /><p className="mt-2 text-3xl font-extrabold">{todays.length}</p><p className="text-sm text-slate-500">Appointments today</p></div>
-        <div className="card"><CheckCircle2 className="text-brand-600" /><p className="mt-2 text-3xl font-extrabold">{list.filter((a) => a.status === 'booked').length}</p><p className="text-sm text-slate-500">Upcoming in total</p></div>
+        <div className="card"><span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50"><CalendarDays className="text-brand-600" /></span><p className="mt-4 text-3xl font-extrabold">{todays.length}</p><p className="text-sm text-slate-500">Appointments today</p></div>
+        <div className="card"><span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50"><CheckCircle2 className="text-brand-600" /></span><p className="mt-4 text-3xl font-extrabold">{list.filter((a) => a.status === 'booked').length}</p><p className="text-sm text-slate-500">Upcoming in total</p></div>
       </div>
       <div className="card mt-6">
         <h2 className="font-bold">Today</h2>

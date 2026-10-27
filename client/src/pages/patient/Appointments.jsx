@@ -62,11 +62,11 @@ export default function Appointments() {
 
   return (
     <div>
-      <h1 className="text-2xl font-extrabold">My appointments</h1>
+      <h1 className="text-3xl font-extrabold">My appointments</h1>
       <div className="mt-4 flex flex-wrap gap-2">
         {['upcoming', 'history'].map((t) => (
           <button key={t} onClick={() => setTab(t)}
-            className={`rounded-lg px-4 py-2 text-sm font-semibold capitalize ${tab === t ? 'bg-brand-600 text-white' : 'bg-white text-slate-600'}`}>
+            className={`rounded-xl px-5 py-2.5 text-sm font-semibold capitalize ${tab === t ? 'bg-brand-600 text-white' : 'bg-white text-slate-600 hover:text-brand-700'}`}>
             {t}
           </button>
         ))}
@@ -107,8 +107,8 @@ export default function Appointments() {
       </div>
 
       {editing && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/40 p-4">
-          <div className="card w-full max-w-md space-y-4">
+        <div className="fixed inset-0 z-40 flex items-center justify-center bg-ink-900/60 backdrop-blur-sm p-4">
+          <div className="card max-h-[90dvh] w-full max-w-md overflow-y-auto space-y-4">
             <h2 className="text-lg font-bold">Reschedule with <span translate="no">{editing.doctor.name}</span></h2>
             <SlotPicker doctorId={editing.doctor._id} ignoreId={editing._id}
               date={slot.date} time={slot.time} onChange={setSlot} />
@@ -120,8 +120,8 @@ export default function Appointments() {
         </div>
       )}
       {reviewing && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/40 p-4">
-          <div className="card w-full max-w-md space-y-4">
+        <div className="fixed inset-0 z-40 flex items-center justify-center bg-ink-900/60 backdrop-blur-sm p-4">
+          <div className="card max-h-[90dvh] w-full max-w-md overflow-y-auto space-y-4">
             <h2 className="text-lg font-bold">Rate <span translate="no">{reviewing.doctor.name}</span></h2>
             <StarRating value={review.rating} size={28} onChange={(n) => setReview({ ...review, rating: n })} />
             <textarea className="input" rows="3" placeholder="Share your experience (optional)"

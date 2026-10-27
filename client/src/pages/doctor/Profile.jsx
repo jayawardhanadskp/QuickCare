@@ -35,7 +35,7 @@ export default function DoctorProfilePage() {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl space-y-5">
-      <h1 className="text-2xl font-extrabold">Profile & availability</h1>
+      <h1 className="text-3xl font-extrabold">Profile & availability</h1>
 
       <div className="card"><PictureUpload /></div>
 
