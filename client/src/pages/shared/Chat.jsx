@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { io } from 'socket.io-client'
 import { Send, ArrowLeft } from 'lucide-react'
 import api from '../../api/axios'
+import { API_URL } from '../../config'
 import { useAuth } from '../../context/AuthContext'
 
 // Live chat between a patient and a doctor they have an appointment with
@@ -18,7 +19,7 @@ export default function Chat() {
   // Connect once with the login token
   useEffect(() => {
     api.get('/chat/contacts').then((res) => setContacts(res.data))
-    const socket = io({ auth: { token: localStorage.getItem('token') } })
+    const socket = io(API_URL, { auth: { token: localStorage.getItem('token') } })
     socketRef.current = socket
 
     // Show a new message only if it belongs to the open conversation

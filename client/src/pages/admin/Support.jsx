@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { io } from 'socket.io-client'
 import { Send, ArrowLeft } from 'lucide-react'
 import api from '../../api/axios'
+import { API_URL } from '../../config'
 
 // Admin answers the support messages sent by patients
 export default function Support() {
@@ -17,7 +18,7 @@ export default function Support() {
 
   useEffect(() => {
     loadList()
-    const socket = io({ auth: { token: localStorage.getItem('token') } })
+    const socket = io(API_URL, { auth: { token: localStorage.getItem('token') } })
     socketRef.current = socket
     // Show the message if its chat is open, and refresh the list on the left
     socket.on('support', (m) => {

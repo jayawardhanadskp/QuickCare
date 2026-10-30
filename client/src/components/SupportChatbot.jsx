@@ -3,6 +3,7 @@ import { io } from 'socket.io-client'
 import { Link } from 'react-router-dom'
 import { MessageCircle, X, Send, Bot } from 'lucide-react'
 import api from '../api/axios'
+import { API_URL } from '../config'
 import { useAuth } from '../context/AuthContext'
 
 const quickReplies = ['Help with booking', 'Payment problem', 'Cancel or change an appointment']
@@ -22,7 +23,7 @@ export default function SupportChatbot() {
   useEffect(() => {
     if (!isPatient) return setMessages([])
     api.get('/support/mine').then((res) => setMessages(res.data))
-    const socket = io({ auth: { token: localStorage.getItem('token') } })
+    const socket = io(API_URL, { auth: { token: localStorage.getItem('token') } })
     socketRef.current = socket
     socket.on('support', (m) => setMessages((old) => [...old, m]))
     return () => socket.disconnect()
